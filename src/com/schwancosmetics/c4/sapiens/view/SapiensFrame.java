@@ -22,6 +22,8 @@ public class SapiensFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private static String 	versao = "1.0.0";
+	
 	private JDesktopPane 	desktop;
 	private JMenuBar     	menuBar;
 	private JMenu        	menuSapiens, menuSair;
@@ -32,7 +34,7 @@ public class SapiensFrame extends JFrame {
 	
 	public SapiensFrame() {
 		super();
-		setTitle("Schwan Cosmetics C4 - Teste de Fluidos");
+		setTitle("Schwan Cosmetics C4 - Teste de Fluidos - " + versao);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {

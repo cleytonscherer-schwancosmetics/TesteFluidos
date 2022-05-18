@@ -133,7 +133,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 	private static final int POS_X_SEQREG = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH + TOLMAX_WIDTH + INGVOL_WIDTH;
 
 	private String[] colunasTestes = { "Data", "Hora", "Origem", "Ord. Prod.", "Produto O.P.", "Lote O.P.", "Bulk", "Lote Bulk", 	"Fórmula Base", "Cor Referência", "Textura", 
-			"Peso G1(g)", "Peso G2(g)", "% ideal", "% Mina", "% Diferença","Qtde. Massa(g)", "Qtde.Ing.Vol.(g)", "% Tol. Min.", " % Tol. Max.", "Ingred. Volátil", "Seq." };
+			"Peso G1(g)", "Peso G2(g)", "% ideal", "% Mina", "% Diferença", "Qtde. Massa(g)", "Qtde.Ing.Vol.(g)", "% Tol. Min.", " % Tol. Max.", "Ingred. Volátil", "Seq." };
 
 	private static final int POS_X_COLUNA_1 = 10;
 

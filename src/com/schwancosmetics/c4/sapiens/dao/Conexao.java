@@ -50,9 +50,9 @@ public class Conexao {
 
 	public Connection getConnection() {
 		if (conexao == null) {
-			String mensagem = "Sem conex„o";
+			String mensagem = "Sem conex√£o";
 			JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);			
-			throw new RuntimeException("conex„o inexistente");
+			throw new RuntimeException("conex√£o inexistente");
 		}
 		clients++;
 		return conexao;

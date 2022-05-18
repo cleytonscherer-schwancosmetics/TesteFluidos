@@ -9,6 +9,9 @@ public class Empresa {
 	private String	sigEmp;
 
 	public Empresa() {
+		this.codEmp = 0;
+		this.nomEmp = " ";
+		this.sigEmp = " ";		
    	}
 
 	public Integer getCodEmp() {
