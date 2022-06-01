@@ -41,9 +41,9 @@ public class TesteFluidosDAO {
 										+ "(USU_CODEMP, USU_CODORI, USU_NUMORP, USU_DATGER,   USU_HORGER,  USU_USUGER, USU_PESOG1, USU_PESOG2, USU_FLUIDE, "
 										+ " USU_FLUMIN, USU_PERDIF, USU_QTDMAS, USU_QTDINGVOL,USU_TEXTURA, USU_DATALT, USU_HORALT, USU_USUALT, USU_NUMCAD, "
 										+ " USU_SITTES, USU_TIPFOR, USU_REFCOR, USU_INGVOL,   USU_TOLMIN,  USU_TOLMAX, USU_CODPRO, USU_CODLOT, USU_CODCMP, "
-										+ " USU_LOTCMP, USU_ID) "
+										+ " USU_LOTCMP, USU_DEPCMP, USU_USERSO, USU_ID) "
 										+ " VALUES "
-										+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+										+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	private final String UPDATE = "UPDATE USU_TTESFLU SET "
 								+ " USU_CODEMP = ? "
@@ -73,7 +73,9 @@ public class TesteFluidosDAO {
 								+ ",USU_CODPRO = ? "
 								+ ",USU_CODLOT = ? "
 								+ ",USU_CODCMP = ? "
-								+ ",USU_LOTCMP = ? "								
+								+ ",USU_LOTCMP = ? "	
+								+ ",USU_DEPCMP = ? "
+								+ ",USU_USERSO = ? "
 								+ " WHERE USU_ID = ? ";
 	
 	/*
@@ -125,7 +127,9 @@ public class TesteFluidosDAO {
             	teste.setCodPro( resultado.getString("USU_CODPRO"));            	
             	teste.setCodLot( resultado.getString("USU_CODLOT"));            	
             	teste.setCodCmp( resultado.getString("USU_CODCMP"));            	
-            	teste.setLotCmp( resultado.getString("USU_LOTCMP"));           	
+            	teste.setLotCmp( resultado.getString("USU_LOTCMP"));
+            	teste.setDepCmp( resultado.getString("USU_DEPCMP"));
+            	teste.setUserSO( resultado.getString("USU_USERSO"));
             	
             	lista.add(teste);
             } 
@@ -176,6 +180,8 @@ public class TesteFluidosDAO {
             	teste.setCodLot( resultado.getString("USU_CODLOT"));
             	teste.setCodCmp( resultado.getString("USU_CODCMP"));
             	teste.setLotCmp( resultado.getString("USU_LOTCMP"));
+            	teste.setDepCmp( resultado.getString("USU_DEPCMP"));
+            	teste.setUserSO( resultado.getString("USU_USERSO"));
             } 
             stmt.close();
         } catch (SQLException e) {
@@ -275,8 +281,11 @@ public class TesteFluidosDAO {
 
             stmt.setString(27, testeFluidos.getCodCmp()); // USU_CODCMP
             stmt.setString(28, testeFluidos.getLotCmp()); // USU_LOTCMP
+            stmt.setString(29, testeFluidos.getDepCmp()); // USU_DEPCMP
             
-            stmt.setInt(   29, testeFluidos.getId());     // USU_ID
+            stmt.setString(30, testeFluidos.getUserSO()); // USU_USERSO
+            
+            stmt.setInt(   31, testeFluidos.getId());     // USU_ID
 
             stmt.executeUpdate();       
             stmt.close();

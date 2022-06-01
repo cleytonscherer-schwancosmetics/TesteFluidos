@@ -59,6 +59,7 @@ public class Sistema {
 		
 		this.numCad = usuario.getNumCad();
 		
+		/*
 		horSis = 0;
 		
 		LocalTime lt = LocalTime.now();
@@ -67,6 +68,7 @@ public class Sistema {
 		String strMinuto = strlt.substring(3, 5);		
 		
 		horSis = (60 * Integer.parseInt(strHora)) + Integer.parseInt(strMinuto);
+		*/
 	}
 	
 	public static Sistema getInstance() {
@@ -89,6 +91,15 @@ public class Sistema {
 	}
 
 	public Integer horSis() {
+		this.horSis = 0;
+		
+		LocalTime lt = LocalTime.now();
+		String strlt = lt.format(timeFormat);
+		String strHora   = strlt.substring(0, 2);
+		String strMinuto = strlt.substring(3, 5);		
+		
+		this.horSis = (60 * Integer.parseInt(strHora)) + Integer.parseInt(strMinuto);
+		
 		return horSis;
 	}
 

@@ -25,7 +25,8 @@ public class ComponenteDAO {
 	private final String SELECT_MIN_ID = "SELECT MIN(USU_SEQCMP) AS USU_SEQCMP FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ?";
 	private final String SELECT_MAX_ID = "SELECT MAX(USU_SEQCMP) AS USU_SEQCMP FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ?";
 	
-	private final String SELECT_BULK   = "SELECT * FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ? AND (USU_CODCMP LIKE '0601006%' OR USU_CODCMP LIKE '07070%') ORDER BY USU_CODLOT";
+	private final String SELECT_BULK   = "SELECT * FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ? AND (USU_CODCMP LIKE '0601006%' OR USU_CODCMP LIKE '0707004"
+			+ "%') ORDER BY USU_CODLOT";
 	
     public LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
         return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
@@ -192,6 +193,7 @@ public class ComponenteDAO {
 
             while (resultado.next()) {
             	Componente componente = new Componente();
+            	
             	componente.setCodEmp(resultado.getInt(   "USU_CODEMP"));
             	componente.setCodOri(resultado.getString("USU_CODORI"));
             	componente.setNumOrp(resultado.getInt(   "USU_NUMORP"));
@@ -215,7 +217,13 @@ public class ComponenteDAO {
             	componente.setSeqMov(resultado.getInt("USU_SEQMOV"));
             	componente.setNumCad(resultado.getInt("USU_NUMCAD"));
             	componente.setCodEtg(resultado.getInt("USU_CODETG"));
-           	
+
+            	/*
+            	System.out.println("------------------------------------------------------------------------------------------------------");
+            	System.out.println("Componente:");
+            	System.out.println(componente.toString());
+            	*/
+            	
             	lista.add(componente);
             } 
             stmt.close();

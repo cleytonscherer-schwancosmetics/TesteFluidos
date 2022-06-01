@@ -32,10 +32,7 @@ public class TesteFluidos {
 	
 	private	Double		qtdMas;
 	
-	//private Double		qtdCic;
 	private double 		qtdIngVol;
-	
-	//private String		tipo;
 	
 	private	String		textura;
 	
@@ -66,6 +63,10 @@ public class TesteFluidos {
 	private String 		codCmp;
 	
 	private String 		lotCmp;
+	
+	private	String		depCmp;
+	
+	private	String		userSO;
 	
 	private DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -336,6 +337,22 @@ public class TesteFluidos {
 	public void setQtdIngVol(double qtdIngVol) {
 		this.qtdIngVol = qtdIngVol;
 	}
+	
+	public String getDepCmp() {
+		return depCmp;
+	}
+
+	public void setDepCmp(String depCmp) {
+		this.depCmp = depCmp;
+	}
+
+	public String getUserSO() {
+		return userSO;
+	}
+
+	public void setUserSO(String userSO) {
+		this.userSO = userSO;
+	}
 
 	public void calculo() {
 		if (this.getPesoG1() != 0.00) { 
@@ -370,7 +387,7 @@ public class TesteFluidos {
 				+ ", horAlt=" + horAlt + ", usuAlt=" + usuAlt + ", numCad=" + numCad + ", sitTes=" + sitTes
 				+ ", tipFor=" + tipFor + ", refCor=" + refCor + ", ingVol=" + ingVol + ", tolMin=" + tolMin
 				+ ", tolMax=" + tolMax + ", codPro=" + codPro + ", codLot=" + codLot + ", codCmp=" + codCmp 
-				+ ", lotCmp=" + lotCmp + "]";
+				+ ", lotCmp=" + lotCmp + ", depCmp=" + depCmp + ", userSO=" + userSO + "]";
 	}
 
 	@Override

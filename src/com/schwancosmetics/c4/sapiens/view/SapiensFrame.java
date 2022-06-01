@@ -22,7 +22,13 @@ public class SapiensFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static String 	versao = "1.0.0";
+	private static String 	versao = "1.0.1";
+	
+	/*
+	 * 1.0.1 - Adicionado gravação do lote do componente LotCmp na tabela de Teste de Fluido
+	 *         Adicionado gravação do Usuário do S.O. (userSO na tabela Teste de Fluido)
+	 *         Corrigido a atualização da hora do sistema
+	 */
 	
 	private JDesktopPane 	desktop;
 	private JMenuBar     	menuBar;

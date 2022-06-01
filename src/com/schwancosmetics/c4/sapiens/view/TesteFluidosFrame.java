@@ -1296,6 +1296,8 @@ public class TesteFluidosFrame extends JInternalFrame {
 			
 			this.testeFluidos.setTolMin(teste.getTolMin());
 			this.testeFluidos.setTolMax(teste.getTolMax());
+			
+			this.testeFluidos.setDepCmp(teste.getDepCmp());
 
 			referenciaCor = referenciaCorServico.query(teste.getRefCor()); 
 			formulaBase = formulaBaseServico.query(teste.getCodEmp(), teste.getTipFor());
@@ -1468,6 +1470,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 					} else {
 						for(Componente cmp : lista) {
 							this.testeFluidos.setCodCmp(cmp.getCodCmp());
+							this.testeFluidos.setDepCmp(cmp.getCodDep());
 							
 							lotesDeComponente.add(cmp.getCodLot());
 						}
@@ -1707,6 +1710,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 		this.testeFluidos.setUsuAlt(SISTEMA.codUsu());
 		this.testeFluidos.setHorAlt(SISTEMA.horSis());
 		this.testeFluidos.setNumCad(SISTEMA.numCad());
+		this.testeFluidos.setUserSO(SISTEMA.usrNam());
 		this.testeFluidos.setSitTes(1);
 
 		cbLotCmp.removeAll();
