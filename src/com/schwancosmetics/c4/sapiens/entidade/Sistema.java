@@ -91,14 +91,14 @@ public class Sistema {
 	}
 
 	public Integer horSis() {
-		this.horSis = 0;
+		horSis = 0;
 		
 		LocalTime lt = LocalTime.now();
 		String strlt = lt.format(timeFormat);
 		String strHora   = strlt.substring(0, 2);
 		String strMinuto = strlt.substring(3, 5);		
 		
-		this.horSis = (60 * Integer.parseInt(strHora)) + Integer.parseInt(strMinuto);
+		horSis = (60 * Integer.parseInt(strHora)) + Integer.parseInt(strMinuto);
 		
 		return horSis;
 	}

@@ -22,7 +22,7 @@ public class SapiensFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static String 	versao = "1.0.1";
+	private static String 	versao = "1.1.0";
 	
 	/*
 	 * 1.0.1 - Adicionado gravação do lote do componente LotCmp na tabela de Teste de Fluido
@@ -34,7 +34,8 @@ public class SapiensFrame extends JFrame {
 	private JMenuBar     	menuBar;
 	private JMenu        	menuSapiens, menuSair;
 	private JMenuItem 		menuItemSair;
-	private JMenuItem 		menuItemTesteFluidos;
+	private JMenuItem 		menuItemTesteFluidosOrigem45;
+	private JMenuItem 		menuItemTesteFluidosOrigem50;
 
 	private JInternalFrame frameInterno;
 	
@@ -71,10 +72,11 @@ public class SapiensFrame extends JFrame {
 		menuSapiens = new JMenu("Cadastro");
 		menuBar.add(menuSapiens);
 
-		menuItemTesteFluidos = new JMenuItem("Teste Fluidos");
-		menuItemTesteFluidos.addActionListener(new ActionListener() {
+		/* Origem 45 */
+		menuItemTesteFluidosOrigem45 = new JMenuItem("Teste Fluidos Origem 45");
+		menuItemTesteFluidosOrigem45.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {          
-				frameInterno = TesteFluidosFrame.getInstance(); 
+				frameInterno = TesteFluidosOrigem45Frame.getInstance(); 
 				
 				if (frameInterno.getParent() != desktop) {
 					desktop.add(frameInterno);
@@ -87,7 +89,26 @@ public class SapiensFrame extends JFrame {
 				}            
 			}
 		});
-		menuSapiens.add(menuItemTesteFluidos);		
+		menuSapiens.add(menuItemTesteFluidosOrigem45);		
+		
+		/* Origem 50 */
+		menuItemTesteFluidosOrigem50 = new JMenuItem("Teste Fluidos Origem 50");
+		menuItemTesteFluidosOrigem50.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {          
+				frameInterno = TesteFluidosOrigem50Frame.getInstance(); 
+				
+				if (frameInterno.getParent() != desktop) {
+					desktop.add(frameInterno);
+				}
+				frameInterno.setVisible(true);
+				try {
+					frameInterno.setSelected(true);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e, "Erro", JOptionPane.ERROR_MESSAGE);               
+				}            
+			}
+		});
+		menuSapiens.add(menuItemTesteFluidosOrigem50);			
 
 		menuSair = new JMenu("Sair");
 		menuBar.add(menuSair);
@@ -111,5 +132,15 @@ public class SapiensFrame extends JFrame {
 			}
 		});
 	}	
-
 }
+
+
+/***************************************************************************************************************\
+ * 1.0.1 - Adicionado gravação do lote do componente LotCmp na tabela de Teste de Fluido
+ *         Adicionado gravação do Usuário do S.O. (userSO na tabela Teste de Fluido)
+ *         Corrigido a atualização da hora do registro do sistema
+ *         
+ * 1.1.0 - Criado uma tela de cadastro por origem (45, 50)     
+ *         Ao alterar um registro, o campo número O.P. ficará desabilitado
+ *             
+\***************************************************************************************************************/
