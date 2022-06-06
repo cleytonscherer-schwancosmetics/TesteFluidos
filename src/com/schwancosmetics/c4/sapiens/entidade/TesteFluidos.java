@@ -32,10 +32,7 @@ public class TesteFluidos {
 	
 	private	Double		qtdMas;
 	
-	//private Double		qtdCic;
 	private double 		qtdIngVol;
-	
-	//private String		tipo;
 	
 	private	String		textura;
 	
@@ -66,6 +63,10 @@ public class TesteFluidos {
 	private String 		codCmp;
 	
 	private String 		lotCmp;
+	
+	private String		userSO;
+	
+	private String		sitOrp;
 	
 	private DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -98,7 +99,9 @@ public class TesteFluidos {
 		this.setCodPro(" ");		
 		this.setCodLot(" ");		
 		this.setCodCmp(" ");		
-		this.setLotCmp(" ");			
+		this.setLotCmp(" ");	
+		this.setUserSO(" ");
+		this.setSitOrp(" ");
 	}
 
 	public Integer getId() {
@@ -336,6 +339,22 @@ public class TesteFluidos {
 	public void setQtdIngVol(double qtdIngVol) {
 		this.qtdIngVol = qtdIngVol;
 	}
+	
+	public String getUserSO() {
+		return userSO;
+	}
+
+	public void setUserSO(String userSO) {
+		this.userSO = userSO;
+	}
+	
+	public String getSitOrp() {
+		return sitOrp;
+	}
+
+	public void setSitOrp(String sitOrp) {
+		this.sitOrp = sitOrp;
+	}
 
 	public void calculo() {
 		if (this.getPesoG1() != 0.00) { 
@@ -370,7 +389,7 @@ public class TesteFluidos {
 				+ ", horAlt=" + horAlt + ", usuAlt=" + usuAlt + ", numCad=" + numCad + ", sitTes=" + sitTes
 				+ ", tipFor=" + tipFor + ", refCor=" + refCor + ", ingVol=" + ingVol + ", tolMin=" + tolMin
 				+ ", tolMax=" + tolMax + ", codPro=" + codPro + ", codLot=" + codLot + ", codCmp=" + codCmp 
-				+ ", lotCmp=" + lotCmp + "]";
+				+ ", lotCmp=" + lotCmp + ", userSO=" + userSO + ", sitOrp=" + sitOrp + "]";
 	}
 
 	@Override

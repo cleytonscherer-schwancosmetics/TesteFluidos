@@ -18,8 +18,8 @@ public class TesteFluidosServico {
 		SISTEMA = Sistema.getInstance();
 	}
 	
-	public List<TesteFluidos> queryByDatGer(LocalDate data) {
-		return testeFluidosDAO.queryByDatGer(data);
+	public List<TesteFluidos> queryByDatGer(LocalDate data, String codOri) {
+		return testeFluidosDAO.queryByDatGer(data, codOri);
 	}
 	
 	public TesteFluidos queryById(Integer id) {
@@ -39,8 +39,8 @@ public class TesteFluidosServico {
 		testeFluidosDAO.delete(id);
 	}
 
-	public void queryDatasComRegistros() {
-		testeFluidosDAO.queryDatasComRegistros();
+	public void queryDatasComRegistros(String codOri) {
+		testeFluidosDAO.queryDatasComRegistros(codOri);
 	}
 	
 	public LocalDate first() {

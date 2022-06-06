@@ -25,7 +25,9 @@ public class ComponenteDAO {
 	private final String SELECT_MIN_ID = "SELECT MIN(USU_SEQCMP) AS USU_SEQCMP FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ?";
 	private final String SELECT_MAX_ID = "SELECT MAX(USU_SEQCMP) AS USU_SEQCMP FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ?";
 	
-	private final String SELECT_BULK   = "SELECT * FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ? AND (USU_CODCMP LIKE '0601006%' OR USU_CODCMP LIKE '07070%') ORDER BY USU_CODLOT";
+	private final String SELECT_BULK   = "SELECT * FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ? AND (USU_CODCMP LIKE '0601006%' OR USU_CODCMP LIKE '0707004%') ORDER BY USU_CODLOT";
+	
+	private final String SELECT_BY_LOTE= "SELECT * FROM USU_TE900CMO WHERE USU_CODEMP = ? AND USU_CODORI = ? AND USU_NUMORP = ? AND USU_CODCMP = ? AND USU_CODLOT = ? ORDER BY USU_CODDEP";
 	
     public LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
         return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
@@ -225,5 +227,53 @@ public class ComponenteDAO {
         }
         return lista;
     }    	
+	
+	public Componente queryByLote(Integer codEmp, String codOri, Integer numOrp, String codCmp, String lotCmp) {
+		Componente componente = null; /* new Componente(); */
+        try {
+        	conexao = Conexao.getInstance().getConnection();
+            stmt = conexao.prepareStatement(SELECT_BY_LOTE);
+            stmt.setInt(   1, codEmp);
+            stmt.setString(2, codOri);
+            stmt.setInt(   3, numOrp);             
+            stmt.setString(4, codCmp);
+            stmt.setString(5,  lotCmp);;
+            resultado = stmt.executeQuery();
+
+            if (resultado.next()) {
+            	componente = new Componente();
+            	
+            	componente.setCodEmp(resultado.getInt(   "USU_CODEMP"));
+            	componente.setCodOri(resultado.getString("USU_CODORI"));
+            	componente.setNumOrp(resultado.getInt(   "USU_NUMORP"));
+            	componente.setSeqCmp(resultado.getInt(   "USU_SEQCMP"));
+            	componente.setCodCmp(resultado.getString("USU_CODCMP"));
+            	componente.setCodDer(resultado.getString("USU_CODDER"));
+            	componente.setCodDep(resultado.getString("USU_CODDEP"));
+            	componente.setCodLot(resultado.getString("USU_CODLOT"));
+            	componente.setDepTra(resultado.getString("USU_DEPTRA"));
+            	componente.setNumSep(resultado.getString("USU_NUMSEP"));
+            	componente.setSeqEnt(resultado.getInt(   "USU_SEQENT"));
+            	componente.setComTra(resultado.getString("USU_COMTRA").charAt(0));
+            	componente.setIndSpa(resultado.getString("USU_INDSPA").charAt(0));
+            	componente.setQtdPrv(resultado.getDouble("USU_QTDPRV"));
+            	componente.setQtdSpa(resultado.getDouble("USU_QTDSPA"));
+            	componente.setQtdSpa2(resultado.getDouble("USU_QTDSPA2"));
+            	componente.setQtdTra(resultado.getDouble("USU_QTDTRA"));
+            	componente.setDatFab(convertToLocalDateViaSqlDate(resultado.getDate("USU_DATFAB")));
+            	componente.setDatVlt(convertToLocalDateViaSqlDate(resultado.getDate("USU_DATVLT")));
+            	componente.setDatMov(convertToLocalDateViaSqlDate(resultado.getDate("USU_DATMOV")));
+            	componente.setSeqMov(resultado.getInt("USU_SEQMOV"));
+            	componente.setNumCad(resultado.getInt("USU_NUMCAD"));
+            	componente.setCodEtg(resultado.getInt("USU_CODETG"));
+            } 
+            stmt.close();
+        } catch (SQLException e) {
+        	String mensagem = e.getMessage();
+        	JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE); 
+        }
+        return componente;
+    }    	
+
 
 }
