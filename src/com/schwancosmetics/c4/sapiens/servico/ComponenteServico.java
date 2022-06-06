@@ -32,4 +32,8 @@ public class ComponenteServico {
 	public List<Componente> queryBulk(Integer codEmp, String codOri, Integer numOrp) {
 		return componenteDAO.queryBulk(codEmp, codOri, numOrp);
 	}
+	
+	public Componente queryByLote(Integer codEmp, String codOri, Integer numOrp, String codCmp, String lotCmp) {
+		return componenteDAO.queryByLote(codEmp, codOri, numOrp, codCmp, lotCmp);
+	}
 }

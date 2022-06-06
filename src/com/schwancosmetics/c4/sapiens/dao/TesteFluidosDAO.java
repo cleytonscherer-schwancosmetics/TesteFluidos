@@ -22,15 +22,37 @@ public class TesteFluidosDAO {
     private Statement	stmt2;
     private ResultSet	datasComRegistros;
     
-	private final static String SELECT_BY_DATGER = "SELECT * FROM USU_TTESFLU WHERE USU_DATGER = ? ORDER BY USU_ID";
+	private final static String SELECT_BY_DATGER = "SELECT USU_CODEMP, USU_CODORI, USU_NUMORP, USU_DATGER, USU_HORGER, USU_USUGER, USU_PESOG1, USU_PESOG2, USU_FLUIDE, "
+													+ " USU_FLUMIN, USU_PERDIF, USU_QTDMAS, USU_QTDINGVOL,USU_TEXTURA, USU_DATALT, USU_HORALT, USU_USUALT, USU_NUMCAD, "
+													+ " USU_SITTES, USU_TIPFOR, USU_REFCOR, USU_INGVOL, USU_TOLMIN, USU_TOLMAX, USU_CODPRO, USU_CODLOT, USU_CODCMP, "
+													+ " USU_LOTCMP, USU_USERSO, USU_ID "
+													+ " ,E900COP.SITORP "
+													+ "  FROM USU_TTESFLU, E900COP "
+													+ " WHERE USU_TTESFLU.USU_DATGER = ? "
+													+ "   AND USU_TTESFLU.USU_CODORI = ? "
+													+ "   AND USU_TTESFLU.USU_CODEMP = E900COP.CODEMP "
+													+ "   AND USU_TTESFLU.USU_CODORI = E900COP.CODORI "
+													+ "   AND USU_TTESFLU.USU_NUMORP = E900COP.NUMORP "
+													+ " ORDER BY USU_TTESFLU.USU_ID ";
 	
-	private final static String SELECT_DATGER = "SELECT DISTINCT USU_DATGER FROM USU_TTESFLU ORDER BY USU_DATGER";
+	private final static String SELECT_DATGER_45 = "SELECT DISTINCT USU_DATGER FROM USU_TTESFLU WHERE USU_CODORI = '45' ORDER BY USU_DATGER";
 	
-	private final static String SELECT_BY_ID   = "SELECT * FROM USU_TTESFLU WHERE USU_ID = ?";
+	private final static String SELECT_DATGER_50 = "SELECT DISTINCT USU_DATGER FROM USU_TTESFLU WHERE USU_CODORI = '50' ORDER BY USU_DATGER";
 	
-	private final static String SELECT_MIN_ID  = "SELECT MIN(USU_ID) AS USU_ID FROM USU_TTESFLU WHERE USU_DATGER = ?";
+	private final static String SELECT_BY_ID    = "SELECT USU_CODEMP, USU_CODORI, USU_NUMORP, USU_DATGER, USU_HORGER, USU_USUGER, USU_PESOG1, USU_PESOG2, USU_FLUIDE, "
+												+ " USU_FLUMIN, USU_PERDIF, USU_QTDMAS, USU_QTDINGVOL,USU_TEXTURA, USU_DATALT, USU_HORALT, USU_USUALT, USU_NUMCAD, "
+												+ " USU_SITTES, USU_TIPFOR, USU_REFCOR, USU_INGVOL, USU_TOLMIN, USU_TOLMAX, USU_CODPRO, USU_CODLOT, USU_CODCMP, "
+												+ " USU_LOTCMP, USU_USERSO, USU_ID "
+												+ " ,E900COP.SITORP "
+												+ "  FROM USU_TTESFLU, E900COP"
+												+ " WHERE USU_ID = ? "
+												+ "   AND USU_TTESFLU.USU_CODEMP = E900COP.CODEMP "
+												+ "   AND USU_TTESFLU.USU_CODORI = E900COP.CODORI "
+												+ "   AND USU_TTESFLU.USU_NUMORP = E900COP.NUMORP ";												
 	
-	private final static String SELECT_MAX_ID  = "SELECT MAX(USU_ID) AS USU_ID FROM USU_TTESFLU WHERE USU_DATGER = ?";
+	private final static String SELECT_MIN_ID  = "SELECT MIN(USU_ID) AS USU_ID FROM USU_TTESFLU WHERE USU_DATGER = ? AND USU_CODORI = ? ";
+	
+	private final static String SELECT_MAX_ID  = "SELECT MAX(USU_ID) AS USU_ID FROM USU_TTESFLU WHERE USU_DATGER = ? AND USU_CODORI = ? ";
 	
 	private final static String SELECT_NEXT_ID = "SELECT USU_TTESFLU_SEQ.NEXTVAL AS USU_ID FROM DUAL";
 	/* create sequence USU_TTESFLU_SEQ minvalue 1 maxvalue 9999999999 start with 1 increment by 1 NOCACHE cycle; */
@@ -41,9 +63,9 @@ public class TesteFluidosDAO {
 										+ "(USU_CODEMP, USU_CODORI, USU_NUMORP, USU_DATGER,   USU_HORGER,  USU_USUGER, USU_PESOG1, USU_PESOG2, USU_FLUIDE, "
 										+ " USU_FLUMIN, USU_PERDIF, USU_QTDMAS, USU_QTDINGVOL,USU_TEXTURA, USU_DATALT, USU_HORALT, USU_USUALT, USU_NUMCAD, "
 										+ " USU_SITTES, USU_TIPFOR, USU_REFCOR, USU_INGVOL,   USU_TOLMIN,  USU_TOLMAX, USU_CODPRO, USU_CODLOT, USU_CODCMP, "
-										+ " USU_LOTCMP, USU_ID) "
+										+ " USU_LOTCMP, USU_USERSO, USU_ID) "
 										+ " VALUES "
-										+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+										+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	private final String UPDATE = "UPDATE USU_TTESFLU SET "
 								+ " USU_CODEMP = ? "
@@ -73,7 +95,8 @@ public class TesteFluidosDAO {
 								+ ",USU_CODPRO = ? "
 								+ ",USU_CODLOT = ? "
 								+ ",USU_CODCMP = ? "
-								+ ",USU_LOTCMP = ? "								
+								+ ",USU_LOTCMP = ? "
+								+ ",USU_USERSO = ? "
 								+ " WHERE USU_ID = ? ";
 	
 	/*
@@ -86,12 +109,14 @@ public class TesteFluidosDAO {
     }
     */	
 	
-	public List<TesteFluidos> queryByDatGer(LocalDate data) {
+	public List<TesteFluidos> queryByDatGer(LocalDate data, String codOri) {
     	List<TesteFluidos> lista = new ArrayList<>();
         try {
         	conexao = Conexao.getInstance().getConnection();
             stmt = conexao.prepareStatement(SELECT_BY_DATGER);            
             stmt.setDate(1, Date.valueOf(data));            
+            stmt.setString(2,codOri);
+            
             resultado = stmt.executeQuery();
 
             while (resultado.next()) {
@@ -126,6 +151,8 @@ public class TesteFluidosDAO {
             	teste.setCodLot( resultado.getString("USU_CODLOT"));            	
             	teste.setCodCmp( resultado.getString("USU_CODCMP"));            	
             	teste.setLotCmp( resultado.getString("USU_LOTCMP"));           	
+            	teste.setUserSO( resultado.getString("USU_USERSO"));
+            	teste.setSitOrp( resultado.getString("SITORP"));
             	
             	lista.add(teste);
             } 
@@ -176,6 +203,8 @@ public class TesteFluidosDAO {
             	teste.setCodLot( resultado.getString("USU_CODLOT"));
             	teste.setCodCmp( resultado.getString("USU_CODCMP"));
             	teste.setLotCmp( resultado.getString("USU_LOTCMP"));
+            	teste.setUserSO( resultado.getString("USU_USERSO"));
+            	teste.setSitOrp( resultado.getString("SITORP"));
             } 
             stmt.close();
         } catch (SQLException e) {
@@ -185,13 +214,13 @@ public class TesteFluidosDAO {
         return teste;
     }	
 	
-	public TesteFluidos first(LocalDate data) {
-		Integer id = this.firstId(data);
+	public TesteFluidos first(LocalDate data, String codOri) {
+		Integer id = this.firstId(data, codOri);
 		return queryById(id);
 	}
 	
-	public TesteFluidos last(LocalDate data) {
-		Integer id = this.lastId(data);
+	public TesteFluidos last(LocalDate data, String codOri) {
+		Integer id = this.lastId(data, codOri);
 		return queryById(id);
 	}
 	
@@ -200,12 +229,15 @@ public class TesteFluidosDAO {
 		return numero;
 	}
 	
-	private Integer firstId(LocalDate data) {
+	private Integer firstId(LocalDate data, String codOri) {
     	Integer id = -1;
         try {
         	conexao = Conexao.getInstance().getConnection();
             stmt = conexao.prepareStatement(SELECT_MIN_ID);            
-            stmt.setDate(1, Date.valueOf(data));            
+            
+            stmt.setDate(1, Date.valueOf(data));         
+            stmt.setString(2,codOri);
+            
             resultado = stmt.executeQuery();
             if (resultado.next()) {
             	id = resultado.getInt("USU_ID");
@@ -218,12 +250,15 @@ public class TesteFluidosDAO {
         return id;		
 	}
 	
-	private Integer lastId(LocalDate data) {
+	private Integer lastId(LocalDate data, String codOri) {
     	Integer id = -1;
         try {
         	conexao = Conexao.getInstance().getConnection();
             stmt = conexao.prepareStatement(SELECT_MAX_ID);            
-            stmt.setDate(1, Date.valueOf(data));            
+            
+            stmt.setDate(1, Date.valueOf(data));
+            stmt.setString(2,codOri);
+            
             resultado = stmt.executeQuery();
 
             if (resultado.next()) {
@@ -276,7 +311,9 @@ public class TesteFluidosDAO {
             stmt.setString(27, testeFluidos.getCodCmp()); // USU_CODCMP
             stmt.setString(28, testeFluidos.getLotCmp()); // USU_LOTCMP
             
-            stmt.setInt(   29, testeFluidos.getId());     // USU_ID
+            stmt.setString(29, testeFluidos.getUserSO()); // USU_USERSO
+            
+            stmt.setInt(   30, testeFluidos.getId());     // USU_ID
 
             stmt.executeUpdate();       
             stmt.close();
@@ -318,11 +355,16 @@ public class TesteFluidosDAO {
         }
 	}
 	
-	public void queryDatasComRegistros() {
+	public void queryDatasComRegistros(String codOri) {
         try {
         	conexao = Conexao.getInstance().getConnection();
             stmt2 = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            datasComRegistros = stmt2.executeQuery(SELECT_DATGER);
+            
+            if (codOri.equals("45")) {
+            	datasComRegistros = stmt2.executeQuery(SELECT_DATGER_45);
+            } else {
+            	datasComRegistros = stmt2.executeQuery(SELECT_DATGER_50);
+            }
 
             datasComRegistros.last();
             

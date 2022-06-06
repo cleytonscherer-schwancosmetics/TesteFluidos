@@ -19,12 +19,12 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+//import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -40,10 +40,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
-import com.schwancosmetics.c4.sapiens.entidade.Componente;
+//import com.schwancosmetics.c4.sapiens.entidade.Componente;
 import com.schwancosmetics.c4.sapiens.entidade.FormulaBase;
 import com.schwancosmetics.c4.sapiens.entidade.OrdemProducao;
-import com.schwancosmetics.c4.sapiens.entidade.OrigemProduto;
+//import com.schwancosmetics.c4.sapiens.entidade.OrigemProduto;
 import com.schwancosmetics.c4.sapiens.entidade.Produto;
 import com.schwancosmetics.c4.sapiens.entidade.ReferenciaCor;
 import com.schwancosmetics.c4.sapiens.entidade.Sistema;
@@ -58,55 +58,60 @@ import com.schwancosmetics.c4.sapiens.excecao.OrdemProducaoNaoInformadaException
 import com.schwancosmetics.c4.sapiens.excecao.OrdemProducaoNaoIniciadaException;
 import com.schwancosmetics.c4.sapiens.excecao.OrdemProducaoNaoLiberadaException;
 import com.schwancosmetics.c4.sapiens.excecao.OrdemProducaoSuspensaException;
-import com.schwancosmetics.c4.sapiens.excecao.OrigemProdutoInvalidaException;
-import com.schwancosmetics.c4.sapiens.excecao.OrigemProdutoNaoInformadaException;
+//import com.schwancosmetics.c4.sapiens.excecao.OrigemProdutoInvalidaException;
+//import com.schwancosmetics.c4.sapiens.excecao.OrigemProdutoNaoInformadaException;
 import com.schwancosmetics.c4.sapiens.excecao.ReferenciaCorNaoEncontradaException;
-import com.schwancosmetics.c4.sapiens.servico.ComponenteServico;
+//import com.schwancosmetics.c4.sapiens.servico.ComponenteServico;
 import com.schwancosmetics.c4.sapiens.servico.FormulaBaseServico;
 import com.schwancosmetics.c4.sapiens.servico.OrdemProducaoServico;
-import com.schwancosmetics.c4.sapiens.servico.OrigemProdutoServico;
+//import com.schwancosmetics.c4.sapiens.servico.OrigemProdutoServico;
 import com.schwancosmetics.c4.sapiens.servico.ProdutoServico;
 import com.schwancosmetics.c4.sapiens.servico.ReferenciaCorServico;
 import com.schwancosmetics.c4.sapiens.servico.TesteFluidosServico;
 
-public class TesteFluidosFrame extends JInternalFrame {
+public class TesteFluidosOrigem45Frame extends JInternalFrame {
 
 	private static Sistema SISTEMA;
 
 	private static final long serialVersionUID = 1L;
 
-	private static TesteFluidosFrame testeFluidosFrame;
+	private static TesteFluidosOrigem45Frame testeFluidosFrame;
 
-	public static TesteFluidosFrame getInstance() {
+	public static TesteFluidosOrigem45Frame getInstance() {
 		if (testeFluidosFrame == null) {
-			testeFluidosFrame = new TesteFluidosFrame();
+			testeFluidosFrame = new TesteFluidosOrigem45Frame();
 		}
 		return testeFluidosFrame;
 	}
 
+	private final String CODORI_45 = "45";
+			
 	private static final int DATGER_WIDTH = 70;
 	private static final int HORGER_WIDTH = 40;
 	private static final int CODORI_WIDTH = 45;
-	private static final int NUMORP_WIDTH = 75;
+	private static final int NUMORP_WIDTH = 70;
 	private static final int CODPRO_WIDTH = 90;
-	private static final int CODLOT_WIDTH = 80;	
+	private static final int CODLOT_WIDTH = 80;
+	/*
 	private static final int CODCMP_WIDTH = 90;
-	private static final int LOTCMP_WIDTH = 110; //70;	
+	private static final int LOTCMP_WIDTH = 110; //70;
+	*/	
 	private static final int FORBAS_WIDTH = 90;
 	private static final int REFCOR_WIDTH = 90;
 	private static final int DESCOR_WIDTH = 250;
 	private static final int PESOG1_WIDTH = 70;
 	private static final int PESOG2_WIDTH = 70;
-	private static final int FLUIDE_WIDTH = 70;
-	private static final int FLUMIN_WIDTH = 70;
+	private static final int FLUIDE_WIDTH = 65;
+	private static final int FLUMIN_WIDTH = 65;
 	private static final int PERDIF_WIDTH = 75;
-	private static final int QTDMAS_WIDTH = 95;
+	private static final int QTDMAS_WIDTH = 90;
 	private static final int QTDING_WIDTH = 90;
-	private static final int TOLMIN_WIDTH = 70;
+	private static final int TOLMIN_WIDTH = 65;
 	private static final int TOLMAX_WIDTH = 70;
-	private static final int INGVOL_WIDTH = 90;
-	private static final int SEQREG_WIDTH = 60;
-	private static final int TABELA_WIDTH = DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH + TOLMAX_WIDTH + INGVOL_WIDTH + SEQREG_WIDTH + 20;
+	private static final int INGVOL_WIDTH = 90;	
+	private static final int SEQREG_WIDTH = 70;
+	private static final int SITORP_WIDTH = 25;
+	private static final int TABELA_WIDTH = DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + /*CODCMP_WIDTH + LOTCMP_WIDTH +*/ FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH + TOLMAX_WIDTH + INGVOL_WIDTH + SEQREG_WIDTH + SITORP_WIDTH + 20;
 
 	private static final int POS_X = 10;
 	private static final int POS_X_DATGER = POS_X;
@@ -115,32 +120,34 @@ public class TesteFluidosFrame extends JInternalFrame {
 	private static final int POS_X_NUMORP = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH;
 	private static final int POS_X_CODPRO = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH;
 	private static final int POS_X_CODLOT = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH;	
+	/*
 	private static final int POS_X_CODCMP = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH;
 	private static final int POS_X_LOTCMP = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH;
-	private static final int POS_X_FORBAS = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH;
-	private static final int POS_X_REFCOR = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH;
-	private static final int POS_X_DESCOR = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH;
-	private static final int POS_X_PESOG1 = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH;
-	private static final int POS_X_PESOG2 = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH;
-	private static final int POS_X_FLUIDE = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH;
-	private static final int POS_X_FLUMIN = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH;
-	private static final int POS_X_PERDIF = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH;
-	private static final int POS_X_QTDMAS = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH;
-	private static final int POS_X_QTDING = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH;
-	private static final int POS_X_TOLMIN = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH;
-	private static final int POS_X_TOLMAX = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH;
-	private static final int POS_X_INGVOL = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH + TOLMAX_WIDTH;
-	private static final int POS_X_SEQREG = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH + CODCMP_WIDTH + LOTCMP_WIDTH + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH + TOLMAX_WIDTH + INGVOL_WIDTH;
+	*/
+	private static final int POS_X_FORBAS = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH;/*CODCMP_WIDTH + LOTCMP_WIDTH */
+	private static final int POS_X_REFCOR = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH;
+	private static final int POS_X_DESCOR = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH;
+	private static final int POS_X_PESOG1 = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH;
+	private static final int POS_X_PESOG2 = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH;
+	private static final int POS_X_FLUIDE = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH;
+	private static final int POS_X_FLUMIN = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH;
+	private static final int POS_X_PERDIF = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH;
+	private static final int POS_X_QTDMAS = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH;
+	private static final int POS_X_QTDING = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH;
+	private static final int POS_X_TOLMIN = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH;
+	private static final int POS_X_TOLMAX = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH;
+	private static final int POS_X_INGVOL = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH + TOLMAX_WIDTH;
+	private static final int POS_X_SEQREG = POS_X + DATGER_WIDTH + HORGER_WIDTH + CODORI_WIDTH + NUMORP_WIDTH + CODPRO_WIDTH + CODLOT_WIDTH /*CODCMP_WIDTH + LOTCMP_WIDTH */ + FORBAS_WIDTH + REFCOR_WIDTH + DESCOR_WIDTH + PESOG1_WIDTH + PESOG2_WIDTH + FLUIDE_WIDTH + FLUMIN_WIDTH + PERDIF_WIDTH + QTDMAS_WIDTH + QTDING_WIDTH + TOLMIN_WIDTH + TOLMAX_WIDTH + INGVOL_WIDTH;
 
-	private String[] colunasTestes = { "Data", "Hora", "Origem", "Ord. Prod.", "Produto O.P.", "Lote O.P.", "Bulk", "Lote Bulk", 	"Fórmula Base", "Cor Referência", "Textura", 
-			"Peso G1(g)", "Peso G2(g)", "% ideal", "% Mina", "% Diferença", "Qtde. Massa(g)", "Qtde.Ing.Vol.(g)", "% Tol. Min.", " % Tol. Max.", "Ingred. Volátil", "Seq." };
+	private String[] colunasTestes = { "Data", "Hora", "Origem", "Ord. Prod.", "Produto O.P.", "Lote O.P.", /*"Bulk", "Lote Bulk",*/ 	"Fórmula Base", "Cor Referência", "Textura", 
+			"Peso G1(g)", "Peso G2(g)", "% ideal", "% Mina", "% Diferença", "Qtde. Massa(g)", "Qtde.Ing.Vol.(g)", "% Tol. Min.", " % Tol. Max.", "Ingred. Volátil", "Seq.", "Sit." };
 
 	private static final int POS_X_COLUNA_1 = 10;
 
 	private static final int POS_Y_LINHA_1 = 10;
-	private static final int POS_Y_LINHA_2 = 35;
-	// private static final int POS_Y_LINHA_3 = 60;
-	private static final int POS_Y_LINHA_4 = 85;
+	private static final int POS_Y_LINHA_2 = 30;
+	private static final int POS_Y_LINHA_3 = 65;
+	//private static final int POS_Y_LINHA_4 = 85;
 
 	private static final int COMPRIMENTO_BOTAO = 95;
 	// private static final int COMPRIMENTO_TEXTO = 90;
@@ -165,8 +172,10 @@ public class TesteFluidosFrame extends JInternalFrame {
 	private JTextField tfCodPro;
 	private JTextField tfCodLot;
 	
+	/*
 	private JTextField tfCodCmp;
 	private JComboBox<String>  cbLotCmp;
+	*/
 	
 	private JTextField tfRefCor;
 	private JTextField tfTextura;
@@ -207,23 +216,25 @@ public class TesteFluidosFrame extends JInternalFrame {
 	private ProdutoServico produtoServico;
 	private ReferenciaCorServico referenciaCorServico;
 	private FormulaBaseServico formulaBaseServico;
-	private OrigemProdutoServico origemProdutoServico;
-	private ComponenteServico componenteServico;
+	//private OrigemProdutoServico origemProdutoServico;
+	//private ComponenteServico componenteServico;
 
 	private TesteFluidos testeFluidos;
 	private OrdemProducao ordemProducao;
 	private Produto produto;
 	private ReferenciaCor referenciaCor;
 	private FormulaBase formulaBase;
-	private OrigemProduto origemProduto;
+	//private OrigemProduto origemProduto;
 	
+	/*
 	private List<String> lotesDeComponente = new ArrayList<>();
+	*/
 	
 	private LocalDate primeiraData;
 	private LocalDate ultimaData;
 
-	private TesteFluidosFrame() {
-		super("Teste de Fluídos", 
+	private TesteFluidosOrigem45Frame() {
+		super("Teste de Fluídos - Origem 45", 
 				false,  // resizeble
 				true,   // closable
 				false,  // maximizable
@@ -234,7 +245,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 		// setExtendedState(Frame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 
-		ALTURA_GRIDE = tela.height - 300;
+		ALTURA_GRIDE = tela.height - 280;
 		
 		/*
 		 * não funciona com java 8 try { setMaximum(true); } catch
@@ -248,17 +259,17 @@ public class TesteFluidosFrame extends JInternalFrame {
 		produtoServico = new ProdutoServico();
 		referenciaCorServico = new ReferenciaCorServico();
 		formulaBaseServico = new FormulaBaseServico();
-		origemProdutoServico = new OrigemProdutoServico();
-		componenteServico = new ComponenteServico();
+		//origemProdutoServico = new OrigemProdutoServico();
+		//componenteServico = new ComponenteServico();
 
 		testeFluidos = new TesteFluidos();
 		ordemProducao = new OrdemProducao();
 		produto = new Produto();
 		referenciaCor = new ReferenciaCor();
 		formulaBase = new FormulaBase();
-		origemProduto = new OrigemProduto();
+		//origemProduto = new OrigemProduto();
 
-		testeFluidosServico.queryDatasComRegistros();
+		testeFluidosServico.queryDatasComRegistros(CODORI_45);
 		primeiraData = testeFluidosServico.first();
 		ultimaData   = testeFluidosServico.last();
 		
@@ -309,9 +320,11 @@ public class TesteFluidosFrame extends JInternalFrame {
 
 		criar_CodLot();
 		
+		/*
 		criar_CodCmp();
 		
 		criar_LotCmp();
+		*/
 
 		criar_DesFor();
 
@@ -381,6 +394,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 		painelCentral.add(tfCodLot);
 	}
 
+	/*
 	private void criar_LotCmp() {
 		JLabel labelLotCmp = new JLabel("Lote Bulk");
 		labelLotCmp.setHorizontalAlignment(JLabel.CENTER);
@@ -404,7 +418,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 			} 
 		});
 	}
-
+	*/
 	
 	private void criar_DesFor() {
 		JLabel labelFormulaBase = new JLabel("Formula Base");
@@ -682,12 +696,38 @@ public class TesteFluidosFrame extends JInternalFrame {
 		});
 
 		tfPesoG2.addFocusListener(new FocusListener() {
-			public void focusGained(FocusEvent e) {
+			public void focusGained(FocusEvent fe) {
+				
+				/*
+				if (modoTela != ModoTela.CONSULTA) {
+					try {
+						consisteOrdemProducao();
+					} catch (ReferenciaCorNaoEncontradaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoNaoInformadaException e) {
+						//tfNumOrp.setText("0");
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoNaoEncontradaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoCanceladaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoFinalizadaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoSuspensaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoNaoIniciadaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoNaoLiberadaException e) {
+						tfNumOrp.requestFocusInWindow();
+					}
+				}
+				*/
+				
 				tfPesoG2.setSelectionStart(0);
 				tfPesoG2.setSelectionEnd(tfPesoG2.getText().length());
 			}
 
-			public void focusLost(FocusEvent e) {
+			public void focusLost(FocusEvent fe) {
 				if (modoTela != ModoTela.CONSULTA) {
 					consistePesoG2();
 				}
@@ -723,12 +763,37 @@ public class TesteFluidosFrame extends JInternalFrame {
 		});
 
 		tfPesoG1.addFocusListener(new FocusListener() {
-			public void focusGained(FocusEvent e) {
+			public void focusGained(FocusEvent fe) {
+				/*
+				if (modoTela != ModoTela.CONSULTA) {
+					try {
+						consisteOrdemProducao();
+					} catch (ReferenciaCorNaoEncontradaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoNaoInformadaException e) {
+						//tfNumOrp.setText("0");
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoNaoEncontradaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoCanceladaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoFinalizadaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoSuspensaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoNaoIniciadaException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (OrdemProducaoNaoLiberadaException e) {
+						tfNumOrp.requestFocusInWindow();
+					}
+				}
+				*/
+				
 				tfPesoG1.setSelectionStart(0);
 				tfPesoG1.setSelectionEnd(tfPesoG1.getText().length());
 			}
 
-			public void focusLost(FocusEvent e) {
+			public void focusLost(FocusEvent fe) {
 				if (modoTela != ModoTela.CONSULTA) {
 					consistePesoG1();
 				}
@@ -750,6 +815,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 		painelCentral.add(tfCodPro);
 	}
 
+	/*
 	private void criar_CodCmp() {
 
 		JLabel labelCodCmp = new JLabel("Bulk");
@@ -763,6 +829,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 		tfCodCmp.setEditable(false);
 		painelCentral.add(tfCodCmp);
 	}
+	*/
 	
 	private void criar_NumOrp() {
 
@@ -785,13 +852,14 @@ public class TesteFluidosFrame extends JInternalFrame {
 			}
 
 			public void focusLost(FocusEvent fe) {
+				
 				if (modoTela != ModoTela.CONSULTA) {
 					try {
 						consisteOrdemProducao();
 					} catch (ReferenciaCorNaoEncontradaException e) {
 						tfNumOrp.requestFocusInWindow();
 					} catch (OrdemProducaoNaoInformadaException e) {
-						tfNumOrp.setText("0");
+						//tfNumOrp.setText("0");
 						tfNumOrp.requestFocusInWindow();
 					} catch (OrdemProducaoNaoEncontradaException e) {
 						tfNumOrp.requestFocusInWindow();
@@ -807,6 +875,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 						tfNumOrp.requestFocusInWindow();
 					}
 				}
+				
 			}
 		});
 
@@ -834,11 +903,12 @@ public class TesteFluidosFrame extends JInternalFrame {
 		tfCodOri = new JTextField(10);
 		tfCodOri.setText("45");
 		tfCodOri.setBounds(POS_X_CODORI, POS_Y_LINHA_2, CODORI_WIDTH, ALTURA_LINHA);
-		tfCodOri.setEditable(true);
+		tfCodOri.setEditable(false);
 		tfCodOri.setHorizontalAlignment(JTextField.CENTER);
 		tfCodOri.requestFocusInWindow();
 		painelCentral.add(tfCodOri);
 
+		/*
 		tfCodOri.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
 				tfCodOri.setSelectionStart(0);
@@ -873,6 +943,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 				}
 			}
 		});
+		*/
 	}
 
 	private void criar_DatGer() {
@@ -921,9 +992,11 @@ public class TesteFluidosFrame extends JInternalFrame {
 						&& (c != KeyEvent.VK_TAB)) {
 					e.consume(); // ignore event
 				}
+				/*
 				if ((c == KeyEvent.VK_ENTER) || (c == KeyEvent.VK_TAB)) {
 					tfCodOri.requestFocusInWindow();
 				}
+				*/
 			}
 		});
 	}
@@ -942,6 +1015,8 @@ public class TesteFluidosFrame extends JInternalFrame {
 		tabelaTesteFluidos.setModel(modeloTesteFluidos);
 		tabelaTesteFluidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabelaTesteFluidos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tabelaTesteFluidos.getTableHeader().setResizingAllowed(false);
+		tabelaTesteFluidos.setRowHeight(ALTURA_LINHA);
 
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -993,6 +1068,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setCellRenderer(centerRenderer);
 		coluna++;
 
+		/*
 		// Componente / Bulk
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setPreferredWidth(CODCMP_WIDTH);
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setCellRenderer(centerRenderer);
@@ -1002,6 +1078,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setPreferredWidth(LOTCMP_WIDTH);
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setCellRenderer(centerRenderer);
 		coluna++;
+		*/
 		
 		// Fórmula Base
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setPreferredWidth(FORBAS_WIDTH);
@@ -1068,14 +1145,19 @@ public class TesteFluidosFrame extends JInternalFrame {
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setPreferredWidth(INGVOL_WIDTH);
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setCellRenderer(centerRenderer);
 		coluna++;
-
+		
 		// Seq. (ID)
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setPreferredWidth(SEQREG_WIDTH);
 		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setCellRenderer(centerRenderer);
 		coluna++;
 
+		// Sit. Ord. Prod.
+		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setPreferredWidth(SITORP_WIDTH);
+		tabelaTesteFluidos.getColumnModel().getColumn(coluna).setCellRenderer(centerRenderer);
+		coluna++;
+		
 		spTesteFluidos = new JScrollPane(tabelaTesteFluidos);
-		spTesteFluidos.setBounds(POS_X_COLUNA_1, POS_Y_LINHA_4, TABELA_WIDTH, ALTURA_GRIDE);
+		spTesteFluidos.setBounds(POS_X_COLUNA_1, POS_Y_LINHA_3, TABELA_WIDTH, ALTURA_GRIDE);
 		painelCentral.add(spTesteFluidos);
 
 		tabelaTesteFluidos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -1259,11 +1341,13 @@ public class TesteFluidosFrame extends JInternalFrame {
 	private void queryByDatGer(LocalDate datGer) {
 
 		modeloTesteFluidos.setRowCount(0);
+		/*
 		lotesDeComponente.clear();
+		*/
 
 		testeFluidos = new TesteFluidos();
 
-		List<TesteFluidos> lista = testeFluidosServico.queryByDatGer(datGer);
+		List<TesteFluidos> lista = testeFluidosServico.queryByDatGer(datGer, CODORI_45);
 
 		for (TesteFluidos teste : lista) {
 			this.testeFluidos.setCodEmp(teste.getCodEmp());
@@ -1296,6 +1380,8 @@ public class TesteFluidosFrame extends JInternalFrame {
 			
 			this.testeFluidos.setTolMin(teste.getTolMin());
 			this.testeFluidos.setTolMax(teste.getTolMax());
+			
+			this.testeFluidos.setSitOrp(teste.getSitOrp());
 
 			referenciaCor = referenciaCorServico.query(teste.getRefCor()); 
 			formulaBase = formulaBaseServico.query(teste.getCodEmp(), teste.getTipFor());
@@ -1309,8 +1395,12 @@ public class TesteFluidosFrame extends JInternalFrame {
 					teste.getNumOrp(), // Número OP					
 					teste.getCodPro(), // Produto
 					teste.getCodLot(), // Lote
+					
+					/*
 					teste.getCodCmp(), // Componente
 					teste.getLotCmp(), // Lote Componente
+					*/
+					
 					desFor, // Tipo
 					teste.getRefCor(), // Referencia Cor
 					teste.getTextura(),
@@ -1323,14 +1413,14 @@ public class TesteFluidosFrame extends JInternalFrame {
 					doubleToString(teste.getQtdIngVol(), 0), // Qtde Ingrediente Volatil
 					doubleToString(teste.getTolMin(), 2), // Tolerancia Min
 					doubleToString(teste.getTolMax(), 2), // Tolerancia Max
-					teste.getIngVol(), // Ingrediente Volatil
-					teste.getId() }); // Seq
+					teste.getIngVol(), // Ingrediente Volatil					
+					teste.getId(),     // Seq
+					teste.getSitOrp() // Situação Ordem Prod.
+			});
 
 			int lastRow = tabelaTesteFluidos.convertRowIndexToView(modeloTesteFluidos.getRowCount() - 1);
 			tabelaTesteFluidos.setRowSelectionInterval(lastRow, lastRow);
 			
-			tabelaTesteFluidos.setRowHeight(ALTURA_LINHA + 5);
-
 			tabelaTesteFluidos.getColumn("% Diferença").setCellRenderer(new DefaultTableCellRenderer() {				
 				
 				private static final long serialVersionUID = 1L;
@@ -1338,9 +1428,9 @@ public class TesteFluidosFrame extends JInternalFrame {
 				@Override
 				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 
-					String strPerDif = (String) tabelaTesteFluidos.getValueAt(row, 15); // 15 = % Diferença
-					String strTolMin = (String) tabelaTesteFluidos.getValueAt(row, 18); // 18 = % Tol. Min.
-					String strTolMax = (String) tabelaTesteFluidos.getValueAt(row, 19); // 19 = % Tol. Max.
+					String strPerDif = (String) tabelaTesteFluidos.getValueAt(row, 13); // 15 = % Diferença
+					String strTolMin = (String) tabelaTesteFluidos.getValueAt(row, 16); // 18 = % Tol. Min.
+					String strTolMax = (String) tabelaTesteFluidos.getValueAt(row, 17); // 19 = % Tol. Max.
 					
 					Double perDif = Double.parseDouble(strPerDif.replace(",", "."));
 					Double tolMin = Double.parseDouble(strTolMin.replace(",", "."));
@@ -1393,6 +1483,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 		}
 	}
 
+	/*
 	private void consisteOrigemProduto() throws OrigemProdutoNaoInformadaException, OrigemProdutoInvalidaException {
 		if (tfCodOri.getText().trim().length() == 0) {
 			String mensagem = "Origem deve ser informada!";
@@ -1414,6 +1505,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 			}
 		}
 	}
+	*/
 
 	protected void consisteOrdemProducao() throws 
 					ReferenciaCorNaoEncontradaException, 
@@ -1424,8 +1516,9 @@ public class TesteFluidosFrame extends JInternalFrame {
 					OrdemProducaoSuspensaException, 
 					OrdemProducaoNaoIniciadaException, 
 					OrdemProducaoNaoLiberadaException {
-
+		
 		if (tfNumOrp.getText().trim().length() == 0) {
+			tfNumOrp.setText("0");
 			String mensagem = "Número da O.P. deve ser informado!";
 			throw new OrdemProducaoNaoInformadaException(mensagem);
 		} else {
@@ -1434,7 +1527,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 			Integer numOrp = Integer.parseInt(tfNumOrp.getText().trim());
 
 			if (numOrp == 0) {
-				String mensagem = "Número da O.P. deve ser informado!";
+				String mensagem = "Um Número da O.P. válido deve ser informado!";
 				throw new OrdemProducaoNaoInformadaException(mensagem);
 			} else {
 
@@ -1451,9 +1544,16 @@ public class TesteFluidosFrame extends JInternalFrame {
 					this.testeFluidos.setNumOrp(ordemProducao.getNumOrp());
 					this.testeFluidos.setCodPro(ordemProducao.getCodPro());
 					this.testeFluidos.setCodLot(ordemProducao.getRelPrd());
+					
+					this.testeFluidos.setCodCmp(ordemProducao.getCodPro());
+					this.testeFluidos.setLotCmp(ordemProducao.getRelPrd());
+					
+					this.testeFluidos.setSitOrp(ordemProducao.getSitOrp());
+					
+					/*
 					this.testeFluidos.setCodCmp(" ");
 					this.testeFluidos.setLotCmp(" ");
-					
+				
 					List<Componente> lista = componenteServico.queryBulk(ordemProducao.getCodEmp(), ordemProducao.getCodOri(), ordemProducao.getNumOrp());					
 					
 					cbLotCmp.removeAllItems();
@@ -1476,6 +1576,7 @@ public class TesteFluidosFrame extends JInternalFrame {
 						//cbLotCmp.setSelectedIndex(-1);
 						//cbLotCmp.setEditable(true);
 					}
+					*/
 					
 					//cbLotCmp.setSelectedIndex(-1);
 					
@@ -1530,10 +1631,12 @@ public class TesteFluidosFrame extends JInternalFrame {
 						this.testeFluidos.setTolMax(formulaBase.getTolMax());
 						this.testeFluidos.setIngVol(formulaBase.getIngVol());
 						
+						/*
 						if (this.testeFluidos.getCodOri().equals("50")) {
 							this.testeFluidos.setTolMin(-10.0);
 							this.testeFluidos.setTolMax(+10.0);
 						}
+						*/
 
 						sincronizarTela();
 					}
@@ -1580,14 +1683,19 @@ public class TesteFluidosFrame extends JInternalFrame {
 		this.modoTela = modoTela;
 		if (this.modoTela == ModoTela.CONSULTA) {			
 			botaoAdicionar.setEnabled(true);
-
+			
 			if (testeFluidos.getId() > 0) {
 				botaoEditar.setEnabled(true);
 				botaoExcluir.setEnabled(true);
+				
+				if (!testeFluidos.getSitOrp().equals("A")) {
+					botaoEditar.setEnabled(false);
+				}
 			} else {
 				botaoEditar.setEnabled(false);
 				botaoExcluir.setEnabled(false);
 			}
+			
 			botaoGravar.setEnabled(false);
 			botaoCancelar.setEnabled(false);
 			botaoSair.setEnabled(true);
@@ -1605,7 +1713,9 @@ public class TesteFluidosFrame extends JInternalFrame {
 			tfPesoG1.setEditable(false);
 			tfPesoG2.setEditable(false);
 			tfQtdeMassa.setEditable(false);
+			/*
 			cbLotCmp.setEnabled(false);
+			*/
 
 			tabelaTesteFluidos.setEnabled(true);
 			tabelaTesteFluidos.setRowSelectionAllowed(true);
@@ -1630,17 +1740,19 @@ public class TesteFluidosFrame extends JInternalFrame {
 			this.setClosable(false);
 
 			tfData.setEditable(false);
-			tfCodOri.setEditable(true);
+			tfCodOri.setEditable(false);
 			tfNumOrp.setEditable(true);
 			tfPesoG1.setEditable(true);
 			tfPesoG2.setEditable(true);
 			tfQtdeMassa.setEditable(false);
+			/*
 			cbLotCmp.setEnabled(true);
+			*/
 
 			tabelaTesteFluidos.setEnabled(false);
 			tabelaTesteFluidos.setRowSelectionAllowed(false);
 
-			tfCodOri.requestFocusInWindow();
+			tfNumOrp.requestFocusInWindow();
 
 		}
 		if (this.modoTela == ModoTela.ALTERADO) {
@@ -1648,6 +1760,8 @@ public class TesteFluidosFrame extends JInternalFrame {
 		}
 		
 		if (this.modoTela == ModoTela.EDITAR) {
+			
+			tfNumOrp.setEditable(false);
 			
 			if (testeFluidos.getPerDif() == 0.00) {
 				//setBackground(tabelaTesteFluidos.getBackground());
@@ -1707,24 +1821,26 @@ public class TesteFluidosFrame extends JInternalFrame {
 		this.testeFluidos.setUsuAlt(SISTEMA.codUsu());
 		this.testeFluidos.setHorAlt(SISTEMA.horSis());
 		this.testeFluidos.setNumCad(SISTEMA.numCad());
+		this.testeFluidos.setUserSO(SISTEMA.usrNam());
 		this.testeFluidos.setSitTes(1);
 
+		/*
 		cbLotCmp.removeAll();
 		lotesDeComponente.clear();
+		*/
 		
 		defineModoTela(ModoTela.ADICIONAR);
 		sincronizarTela();
-		tfCodOri.requestFocusInWindow();
+		tfNumOrp.requestFocusInWindow();
 	}
 
 	private void gravar() {
 		testeFluidosServico.save(this.testeFluidos);
 	
-		testeFluidosServico.queryDatasComRegistros();
+		testeFluidosServico.queryDatasComRegistros(CODORI_45);
 		primeiraData = testeFluidosServico.first();
 		ultimaData   = testeFluidosServico.last();
-
-		
+	
 		queryByDatGer(ultimaData);
 		
 		defineModoTela(ModoTela.CONSULTA);
@@ -1748,8 +1864,10 @@ public class TesteFluidosFrame extends JInternalFrame {
 	}
 
 	private void cancelar() {
+		/*
 		cbLotCmp.removeAllItems();
 		lotesDeComponente.clear();
+		*/
 		sincronizarLinhaAtual();
 		defineModoTela(ModoTela.CONSULTA);
 	}
@@ -1772,22 +1890,24 @@ public class TesteFluidosFrame extends JInternalFrame {
 		produto = produtoServico.query(testeFluidos.getCodEmp(), testeFluidos.getCodPro());
 		formulaBase = formulaBaseServico.query(testeFluidos.getCodEmp(), testeFluidos.getTipFor());
 
-		tfData.setText(testeFluidos.getDatGer().format(formatoData));
+		tfData.setText(  testeFluidos.getDatGer().format(formatoData));
 		tfCodOri.setText(testeFluidos.getCodOri());
 		tfNumOrp.setText(testeFluidos.getNumOrp().toString());
 		
 		tfCodPro.setText(testeFluidos.getCodPro());
 		tfCodLot.setText(testeFluidos.getCodLot());
 		
+		/*
 		tfCodCmp.setText(testeFluidos.getCodCmp());
 	
 		cbLotCmp.removeAllItems();
 		for(String lote : lotesDeComponente) {
 			cbLotCmp.addItem(lote);
 		}
+		*/
 		
 		tfDesFor.setText(formulaBase.getDesFor());
-		tfRefCor.setText(testeFluidos.getRefCor().toString());
+		tfRefCor.setText( testeFluidos.getRefCor().toString());
 		tfTextura.setText(testeFluidos.getTextura());
 
 		tfFluIde.setText(doubleToString(testeFluidos.getFluIde(), 2));
@@ -1824,11 +1944,13 @@ public class TesteFluidosFrame extends JInternalFrame {
 	protected void sincronizarLinhaAtual() {
 		
 		if (tabelaTesteFluidos.getRowCount() > 0) {
-			Integer id = (Integer) tabelaTesteFluidos.getValueAt(tabelaTesteFluidos.getSelectedRow(), 21); // 21 = ID (Seq.)
+			Integer id = (Integer) tabelaTesteFluidos.getValueAt(tabelaTesteFluidos.getSelectedRow(), 19); // 19 = ID (Seq.)
 			testeFluidos = testeFluidosServico.queryById(id);
 
+			/*
 			lotesDeComponente.clear();
 			lotesDeComponente.add(testeFluidos.getLotCmp());
+			*/
 		} else {
 			testeFluidos = new TesteFluidos();
 			LocalDate data = LocalDate.parse(tfData.getText(), formatoData);

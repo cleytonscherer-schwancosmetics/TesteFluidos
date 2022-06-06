@@ -1,6 +1,7 @@
 package com.schwancosmetics.c4.sapiens.entidade;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Componente {
@@ -61,6 +62,8 @@ public class Componente {
 		this.seqCmp = seqCmp;
 	}
 
+	private DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
 	public Integer getCodEmp() {
 		return codEmp;
 	}
@@ -267,7 +270,9 @@ public class Componente {
 	public String toString() {
 		return "Componente [codEmp=" + codEmp + ", codOri=" + codOri + ", numOrp=" + numOrp + ", seqCmp=" + seqCmp
 				+ ", codCmp=" + codCmp + ", codDer=" + codDer + ", qtdPrv=" + qtdPrv + ", qtdTra=" + qtdTra
-				+ ", qtdSpa=" + qtdSpa + ", qtdSpa2=" + qtdSpa2 + ", datFab=" + datFab + ", datVlt=" + datVlt
+				+ ", qtdSpa=" + qtdSpa + ", qtdSpa2=" + qtdSpa2 
+				+ ", datFab=" + datFab.format(formatoData) 
+				+ ", datVlt=" + datVlt.format(formatoData)
 				+ ", codDep=" + codDep + ", codLot=" + codLot + ", comTra=" + comTra + ", depTra=" + depTra
 				+ ", numSep=" + numSep + ", seqEnt=" + seqEnt + ", datMov=" + datMov + ", seqMov=" + seqMov
 				+ ", indSpa=" + indSpa + ", numCad=" + numCad + ", codEtg=" + codEtg + "]";
