@@ -194,6 +194,7 @@ public class ComponenteDAO {
 
             while (resultado.next()) {
             	Componente componente = new Componente();
+            	
             	componente.setCodEmp(resultado.getInt(   "USU_CODEMP"));
             	componente.setCodOri(resultado.getString("USU_CODORI"));
             	componente.setNumOrp(resultado.getInt(   "USU_NUMORP"));
@@ -217,7 +218,13 @@ public class ComponenteDAO {
             	componente.setSeqMov(resultado.getInt("USU_SEQMOV"));
             	componente.setNumCad(resultado.getInt("USU_NUMCAD"));
             	componente.setCodEtg(resultado.getInt("USU_CODETG"));
-           	
+
+            	/*
+            	System.out.println("------------------------------------------------------------------------------------------------------");
+            	System.out.println("Componente:");
+            	System.out.println(componente.toString());
+            	*/
+            	
             	lista.add(componente);
             } 
             stmt.close();

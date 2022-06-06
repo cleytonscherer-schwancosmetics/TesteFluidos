@@ -307,12 +307,10 @@ public class TesteFluidosDAO {
             stmt.setDouble(24, testeFluidos.getTolMax()); // USU_TOLMAX
             stmt.setString(25, testeFluidos.getCodPro()); // USU_CODPRO
             stmt.setString(26, testeFluidos.getCodLot()); // USU_CODLOT
-
             stmt.setString(27, testeFluidos.getCodCmp()); // USU_CODCMP
             stmt.setString(28, testeFluidos.getLotCmp()); // USU_LOTCMP
             
-            stmt.setString(29, testeFluidos.getUserSO()); // USU_USERSO
-            
+            stmt.setString(29, testeFluidos.getUserSO()); // USU_USERSO            
             stmt.setInt(   30, testeFluidos.getId());     // USU_ID
 
             stmt.executeUpdate();       

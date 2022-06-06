@@ -24,6 +24,12 @@ public class SapiensFrame extends JFrame {
 	
 	private static String 	versao = "1.1.0";
 	
+	/*
+	 * 1.0.1 - Adicionado gravação do lote do componente LotCmp na tabela de Teste de Fluido
+	 *         Adicionado gravação do Usuário do S.O. (userSO na tabela Teste de Fluido)
+	 *         Corrigido a atualização da hora do sistema
+	 */
+	
 	private JDesktopPane 	desktop;
 	private JMenuBar     	menuBar;
 	private JMenu        	menuSapiens, menuSair;
