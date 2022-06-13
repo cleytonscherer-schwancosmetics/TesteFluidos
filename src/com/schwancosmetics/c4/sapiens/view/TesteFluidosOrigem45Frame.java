@@ -192,7 +192,7 @@ public class TesteFluidosOrigem45Frame extends JInternalFrame {
 	private JButton botaoPesquisar;
 	private JButton botaoAdicionar;
 	private JButton botaoGravar;
-	private JButton botaoExcluir;
+	/* private JButton botaoExcluir; */
 	private JButton botaoCancelar;
 	private JButton botaoEditar;
 	private JButton botaoSair;
@@ -1654,7 +1654,7 @@ public class TesteFluidosOrigem45Frame extends JInternalFrame {
 		Double pesoG1 = Double.valueOf(tfPesoG1.getText().trim().replace(",", "."));
 		this.testeFluidos.setPesoG1(pesoG1);
 
-		calculo();
+		this.calculo();
 	}
 
 	private void consistePesoG2() {
@@ -1666,7 +1666,7 @@ public class TesteFluidosOrigem45Frame extends JInternalFrame {
 		Double pesoG2 = Double.valueOf(tfPesoG2.getText().trim().replace(",", "."));
 		this.testeFluidos.setPesoG2(pesoG2);
 
-		calculo();
+		this.calculo();
 	}
 
 	private void consisteQtdeMassa() {
@@ -1677,6 +1677,8 @@ public class TesteFluidosOrigem45Frame extends JInternalFrame {
 
 		Double qtdeMassa = Double.valueOf(tfQtdeMassa.getText().trim().replace(",", "."));
 		this.testeFluidos.setQtdMas(qtdeMassa);
+		
+		this.calculo();
 	}
 
 	private void defineModoTela(ModoTela modoTela) {
@@ -1685,11 +1687,12 @@ public class TesteFluidosOrigem45Frame extends JInternalFrame {
 			botaoAdicionar.setEnabled(true);
 			
 			if (testeFluidos.getId() > 0) {
-				botaoEditar.setEnabled(true);
-				botaoExcluir.setEnabled(true);
-				
-				if (!testeFluidos.getSitOrp().equals("A")) {
+				if (testeFluidos.getSitOrp().equals("A")) {
+					botaoEditar.setEnabled(true);
+					botaoExcluir.setEnabled(true);					
+				} else {
 					botaoEditar.setEnabled(false);
+					botaoExcluir.setEnabled(false);					
 				}
 			} else {
 				botaoEditar.setEnabled(false);
@@ -1956,6 +1959,8 @@ public class TesteFluidosOrigem45Frame extends JInternalFrame {
 			LocalDate data = LocalDate.parse(tfData.getText(), formatoData);
 			testeFluidos.setDatGer(data);
 		}
+		
+		defineModoTela(ModoTela.CONSULTA);
 		sincronizarTela();
 	}
 

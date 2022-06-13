@@ -48,6 +48,7 @@ import com.schwancosmetics.c4.sapiens.entidade.Produto;
 import com.schwancosmetics.c4.sapiens.entidade.ReferenciaCor;
 import com.schwancosmetics.c4.sapiens.entidade.Sistema;
 import com.schwancosmetics.c4.sapiens.entidade.TesteFluidos;
+import com.schwancosmetics.c4.sapiens.excecao.ComponenteBulkNaoEncontradoException;
 import com.schwancosmetics.c4.sapiens.excecao.DataFuturaException;
 import com.schwancosmetics.c4.sapiens.excecao.DataInvalidaException;
 import com.schwancosmetics.c4.sapiens.excecao.DataNaoInformadaException;
@@ -415,12 +416,32 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 
 			public void focusLost(FocusEvent fe) { 
 				try {
-					consisteLotCmp();	
+					//consisteLotCmp();
+					consisteEntradas();
+					
 				} catch (LoteComponenteNaoInformadoException e) {
 					tfLotCmp.requestFocusInWindow();					
 				} catch (LoteComponenteNaoFazParteDaOPException e) {
 					tfLotCmp.requestFocusInWindow();
-				}
+				} catch (ReferenciaCorNaoEncontradaException e) {
+					tfNumOrp.requestFocusInWindow();
+				} catch (OrdemProducaoNaoInformadaException e) {
+					tfNumOrp.requestFocusInWindow();
+				} catch (OrdemProducaoNaoEncontradaException e) {
+					tfNumOrp.requestFocusInWindow();
+				} catch (OrdemProducaoCanceladaException e) {
+					tfNumOrp.requestFocusInWindow();
+				} catch (OrdemProducaoFinalizadaException e) {
+					tfNumOrp.requestFocusInWindow();
+				} catch (OrdemProducaoSuspensaException e) {
+					tfNumOrp.requestFocusInWindow();
+				} catch (OrdemProducaoNaoIniciadaException e) {
+					tfNumOrp.requestFocusInWindow();
+				} catch (OrdemProducaoNaoLiberadaException e) {
+					tfNumOrp.requestFocusInWindow();
+				} catch (ComponenteBulkNaoEncontradoException e) {
+					tfNumOrp.requestFocusInWindow();
+				} 			
 			}
 		});
 		
@@ -817,11 +838,11 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 			public void focusLost(FocusEvent fe) {
 				if (modoTela != ModoTela.CONSULTA) {
 					try {
-						consisteOrdemProducao();
+						//consisteOrdemProducao();
+						consisteEntradas();
 					} catch (ReferenciaCorNaoEncontradaException e) {
 						tfNumOrp.requestFocusInWindow();
 					} catch (OrdemProducaoNaoInformadaException e) {
-						//tfNumOrp.setText("0");
 						tfNumOrp.requestFocusInWindow();
 					} catch (OrdemProducaoNaoEncontradaException e) {
 						tfNumOrp.requestFocusInWindow();
@@ -835,7 +856,13 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 						tfNumOrp.requestFocusInWindow();
 					} catch (OrdemProducaoNaoLiberadaException e) {
 						tfNumOrp.requestFocusInWindow();
-					}
+					} catch (ComponenteBulkNaoEncontradoException e) {
+						tfNumOrp.requestFocusInWindow();
+					} catch (LoteComponenteNaoInformadoException e) {
+						tfLotCmp.requestFocusInWindow();
+					} catch (LoteComponenteNaoFazParteDaOPException e) {
+						tfLotCmp.requestFocusInWindow();
+					}					
 				}
 			}
 		});
@@ -1411,6 +1438,24 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 		}
 		sincronizarLinhaAtual();
 	}
+	
+	private void consisteEntradas() throws 
+			ReferenciaCorNaoEncontradaException, 
+			OrdemProducaoNaoInformadaException,
+			OrdemProducaoNaoEncontradaException, 
+			OrdemProducaoCanceladaException, 
+			OrdemProducaoFinalizadaException,
+			OrdemProducaoSuspensaException, 
+			OrdemProducaoNaoIniciadaException, 
+			OrdemProducaoNaoLiberadaException,
+			ComponenteBulkNaoEncontradoException,
+			LoteComponenteNaoInformadoException, 
+			LoteComponenteNaoFazParteDaOPException {
+		
+		consisteOrdemProducao();
+		
+		consisteLotCmp();
+	}
 
 	private void consisteData() throws DataNaoInformadaException, DataInvalidaException, DataFuturaException {
 		if (tfData.getText().trim().length() == 0) {
@@ -1467,7 +1512,8 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 					OrdemProducaoFinalizadaException,
 					OrdemProducaoSuspensaException, 
 					OrdemProducaoNaoIniciadaException, 
-					OrdemProducaoNaoLiberadaException {
+					OrdemProducaoNaoLiberadaException,
+					ComponenteBulkNaoEncontradoException {
 
 		if (tfNumOrp.getText().trim().length() == 0) {
 			tfNumOrp.setText("0");
@@ -1554,7 +1600,16 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 					}
 
 					this.produto = produtoServico.query(testeFluidos.getCodEmp(), testeFluidos.getCodCmp());
-					this.referenciaCor = referenciaCorServico.query(produto.getRefCor());
+					
+					if (produto.getCodPro() == null) {
+						String mensagem = "O.P. " + tfCodOri.getText() + " / " + tfNumOrp.getText()
+						+ " não tem um Componente Bulk válido.";
+						throw new ComponenteBulkNaoEncontradoException(mensagem);						
+					} else {
+						this.referenciaCor = referenciaCorServico.query(produto.getRefCor());	
+					}
+					
+					
 
 					if (referenciaCor.getRefCor() == null) {
 						String mensagem = "Referência Cor não encontrada no cadastro do Produto " + produto.getCodPro();
@@ -1567,8 +1622,17 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 						this.testeFluidos.setTextura(referenciaCor.getDesRef());
 
 						this.formulaBase = formulaBaseServico.query(SISTEMA.codEmp(), referenciaCor.getTipFor());
+						
+						/*
 						this.testeFluidos.setTolMin(formulaBase.getTolMin());
 						this.testeFluidos.setTolMax(formulaBase.getTolMax());
+						
+						if (this.testeFluidos.getCodOri().equals("50")) {
+							this.testeFluidos.setTolMin(-10.0);
+							this.testeFluidos.setTolMax(+10.0);
+						}
+						*/
+						
 						this.testeFluidos.setIngVol(formulaBase.getIngVol());
 						
 						sincronizarTela();
@@ -1581,29 +1645,7 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 	private void consisteLotCmp() throws 
 					LoteComponenteNaoInformadoException, 
 					LoteComponenteNaoFazParteDaOPException {
-		/*
-		try {
-			consisteOrdemProducao();
-		} catch (ReferenciaCorNaoEncontradaException e) {
-			tfNumOrp.requestFocusInWindow();
-		} catch (OrdemProducaoNaoInformadaException e) {
-			//tfNumOrp.setText("0");
-			tfNumOrp.requestFocusInWindow();
-		} catch (OrdemProducaoNaoEncontradaException e) {
-			tfNumOrp.requestFocusInWindow();
-		} catch (OrdemProducaoCanceladaException e) {
-			tfNumOrp.requestFocusInWindow();
-		} catch (OrdemProducaoFinalizadaException e) {
-			tfNumOrp.requestFocusInWindow();
-		} catch (OrdemProducaoSuspensaException e) {
-			tfNumOrp.requestFocusInWindow();
-		} catch (OrdemProducaoNaoIniciadaException e) {
-			tfNumOrp.requestFocusInWindow();
-		} catch (OrdemProducaoNaoLiberadaException e) {
-			tfNumOrp.requestFocusInWindow();
-		}
-		*/		
-		
+	
 		if (tfLotCmp.getText().trim().length() == 0) {
 			String mensagem = "Lote do Bulk deve ser informado!";
 			throw new LoteComponenteNaoInformadoException(mensagem);
@@ -1651,7 +1693,7 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 		Double pesoG2 = Double.valueOf(tfPesoG2.getText().trim().replace(",", "."));
 		this.testeFluidos.setPesoG2(pesoG2);
 
-		calculo();
+		this.calculo();
 	}
 
 	private void consisteQtdeMassa() {
@@ -1662,22 +1704,29 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 
 		Double qtdeMassa = Double.valueOf(tfQtdeMassa.getText().trim().replace(",", "."));
 		this.testeFluidos.setQtdMas(qtdeMassa);
+		
+		this.calculo();
 	}
 
 	private void defineModoTela(ModoTela modoTela) {
 		this.modoTela = modoTela;
 		if (this.modoTela == ModoTela.CONSULTA) {
 			
+			/*
+			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println(testeFluidos.toString());
+			*/
+			
 			botaoAdicionar.setEnabled(true);
 
 			if (testeFluidos.getId() > 0) {
-				botaoEditar.setEnabled(true);
-				botaoExcluir.setEnabled(true);
-				
-				if (!testeFluidos.getSitOrp().equals("A")) {
+				if (testeFluidos.getSitOrp().equals("A")) {
+					botaoEditar.setEnabled(true);
+					botaoExcluir.setEnabled(true);
+				} else {
 					botaoEditar.setEnabled(false);
-				}
-				
+					botaoExcluir.setEnabled(false);					
+				}				
 			} else {
 				botaoEditar.setEnabled(false);
 				botaoExcluir.setEnabled(false);
@@ -1941,6 +1990,8 @@ public class TesteFluidosOrigem50Frame extends JInternalFrame {
 			LocalDate data = LocalDate.parse(tfData.getText(), formatoData);
 			testeFluidos.setDatGer(data);
 		}
+		
+		defineModoTela(ModoTela.CONSULTA);
 		sincronizarTela();
 	}
 

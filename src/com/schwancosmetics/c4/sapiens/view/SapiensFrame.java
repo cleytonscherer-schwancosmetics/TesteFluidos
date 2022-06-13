@@ -22,13 +22,7 @@ public class SapiensFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static String 	versao = "1.1.0";
-	
-	/*
-	 * 1.0.1 - Adicionado gravação do lote do componente LotCmp na tabela de Teste de Fluido
-	 *         Adicionado gravação do Usuário do S.O. (userSO na tabela Teste de Fluido)
-	 *         Corrigido a atualização da hora do sistema
-	 */
+	private static String 	versao = "1.1.2";
 	
 	private JDesktopPane 	desktop;
 	private JMenuBar     	menuBar;
@@ -136,11 +130,17 @@ public class SapiensFrame extends JFrame {
 
 
 /***************************************************************************************************************\
- * 1.0.1 - Adicionado gravação do lote do componente LotCmp na tabela de Teste de Fluido
- *         Adicionado gravação do Usuário do S.O. (userSO na tabela Teste de Fluido)
- *         Corrigido a atualização da hora do registro do sistema
+ * v1.0.1 - Adicionado gravação do lote do componente LotCmp na tabela de Teste de Fluido
+ *          Adicionado gravação do Usuário do S.O. (userSO na tabela Teste de Fluido)
+ *          Corrigido a atualização da hora do registro do sistema
  *         
- * 1.1.0 - Criado uma tela de cadastro por origem (45, 50)     
- *         Ao alterar um registro, o campo número O.P. ficará desabilitado
- *             
+ * v1.1.0 - Criado uma tela de cadastro por origem (45, 50)     
+ *          Ao alterar um registro, o campo número O.P. ficará desabilitado
+ *
+ * v1.1.1 - Correção da Tolerância Mínima = -10 e Máxima = +10 quando a OP for de origem 50.
+ *          Os botões Editar e Excluir somente ficarão ativos quando a OP estiver com situação Ativa.
+ *         
+ * v1.1.2 - A função calculo() agora também é chamada ao sair do TextField de Qtde. Massa
+ *          Adicionada uma Exception para quando a OP não tem um Bulk valido (0601006 ou 07007004)
+ *          
 \***************************************************************************************************************/
